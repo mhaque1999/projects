@@ -1,0 +1,24 @@
+body{
+    background-color:gold;
+}
+
+button{
+    /*text-align: center;*/
+    position: absolute;
+    display: inline-block;
+    /*margin: 5% 10% 95% 10%;*/
+    margin: 0px 0px 0px 100px;
+}
+
+.todo_item{
+    font-size: 20pt;
+}
+
+.todo_item:hover{
+    background-color: lightgray;
+}
+
+.completed{
+    color:black;
+    text-decoration: line-through;
+}
