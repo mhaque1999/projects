@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet"
+        href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body>
+<div class="container">
+  <span><button>Sort by</button> <select id="sorting-type">
+    <option value="alphabetically">Alphabetically</option>
+    <option value="rating-lowest-to-highest">Rating lowest to highest</option>
+    <option value="rating-highest-to-lowest">Rating highest to lowest</option>
+  </select></span> 
+  <form id="movie-form">
+    <input class = "movie-title" type = "text" placeholder = "Name of movie title">
+    <input class = "movie-rating" type = "number" min = "0" max = "10" value = "0">
+    <input class = "submit" type="submit">
+  </form>
+
+  <table class = "table">
+    <thead >
+        <tr>
+            <th>Title</th>
+            <th>Rating</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+    </tbody>
+</table>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="movie-app.js"></script>
+</body>
+
+</html>
