@@ -19,8 +19,12 @@ async function login(evt) {
 
   // User.login retrieves user info from API and returns User instance
   // which we'll make the globally-available, logged-in user.
-  currentUser = await User.login(username, password);
-
+  try{
+    currentUser = await User.login(username, password);
+  } catch(err){
+    alert("Incorrect Credentials");
+    return null;
+  }
   $loginForm.trigger("reset");
 
   saveUserCredentialsInLocalStorage();
@@ -44,12 +48,18 @@ async function signup(evt) {
 
   // User.signup retrieves user info from API and returns User instance
   // which we'll make the globally-available, logged-in user.
-  currentUser = await User.signup(username, password, name);
-
+  try{
+    currentUser = await User.signup(username, password, name);
+  } catch(err){
+    alert("Username has been taken");
+    return null;
+  }
   saveUserCredentialsInLocalStorage();
   updateUIOnUserLogin();
 
   $signupForm.trigger("reset");
+  $loginForm.hide();
+  $signupForm.hide();
 }
 
 $signupForm.on("submit", signup);

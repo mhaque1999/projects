@@ -142,4 +142,3 @@ $ownStoriesList.on("click", ".fa-trash", async (event)=>{
   putOwnStoriesOnPage();
 
 })
-
