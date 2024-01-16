@@ -18,6 +18,12 @@ survey = surveys["satisfaction"]
 def home_page():
     """Renders the home page with the survey title and instructions"""
     # responses.clear()
+    response_list = session["responses"]
+
+    if len( response_list ) == len( survey.questions ):
+        flash("You have completed the survey")
+        return redirect("/complete")
+
     return render_template("home.html", survey_title = survey.title, instruction = survey.instructions )
 
 @app.route("/start", methods=["GET","POST"])
@@ -31,12 +37,15 @@ def go_to_question_page():
 def question_page(question_number):
     """Checks whether the user is on the right question and renders the page with appropriate question"""
     response_list = session["responses"]
+
     if len( response_list ) == len( survey.questions ):
         flash("You have completed the survey")
         return redirect("/complete")
+
     if not( int(question_number) == len( response_list )):
         flash("Please complete the current question.")
         return redirect(f"/question/{len( response_list )}")
+
     return render_template("question.html", survey_questions = survey.questions[int(question_number)].question, choices = survey.questions[int(question_number)].choices)
 
 @app.route("/answer", methods = ["GET","POST"])
