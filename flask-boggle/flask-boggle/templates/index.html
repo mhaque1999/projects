@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Boggle Game</title>
+    <!-- <link rel="stylesheet" href="/static/boggle.css"> -->
+  </head>
+  <body>
+<!--     <p class="message"></p>
+    <ul class="found_word">
+        
+    </ul> -->
+    
+    <label for="hi_score">Hi-Score:</label>
+    <b id="hi_score">{{hi_score}}</b>
+    <br>
+    <label for="score">Score:</label>
+    <b id="score">0</b>
+    <br>
+    <label for="num_of_plays">Number of Plays:</label>
+    <b id="num_of_plays">{{num_of_plays}}</b>
+    <br><br>
+
+    <table>
+        <tbody>
+            {% for row in boggle_board %}
+            <tr>
+                {% for char in row %}
+                <td>{{char}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <form id="guess" method="POST">
+        <input type="text" name="word_guess" class="guess" placeholder="type your answer">
+        <button type="submit">Submit</button>
+
+    </form>
+
+    <p class="message"></p>
+    <ul class="found_word">
+        
+    </ul>
+
+    <script src="http://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/axios@0.19.0/dist/axios.js"></script>
+    <script src="/static/boggle.js"></script>
+    <script>
+    let game = new BoggleGame(60,5,5);
+    </script>
+  </body>
+</html>
