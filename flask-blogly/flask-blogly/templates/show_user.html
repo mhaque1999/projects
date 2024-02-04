@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}<h1>{{ user.full_name }}</h1>{% endblock %}
+
+{% block user_form %}
+
+
+{% if user.image_url %}
+  <div>
+    <img src="{{ user.image_url }}"> <br><br>
+  </div>
+  {% endif %}
+
+  <div>
+    <form>
+      <button formaction="/users/{{ user.id }}/edit" formmethod="GET">Edit</button>
+      <br><br>
+      <button formaction="/users/{{ user.id }}/delete" formmethod="POST">Delete</button>
+    </form>
+
+  </div>
+
+{% endblock %}
