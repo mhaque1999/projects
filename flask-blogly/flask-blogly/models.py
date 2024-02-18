@@ -1,10 +1,10 @@
 """SQLAlchemy models for blogly."""
 
 from flask_sqlalchemy import SQLAlchemy
+import datetime
 
 db = SQLAlchemy()
-
-DEFAULT_IMAGE = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+IMAGE = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
 
 
 class User(db.Model):
@@ -15,13 +15,23 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.Text, nullable=False)
     last_name = db.Column(db.Text, nullable=False)
-    image_url = db.Column(db.Text, nullable=False, default=DEFAULT_IMAGE)
-
+    image_url = db.Column(db.Text, nullable=False, default=IMAGE)
+    posts = db.relationship("Post", backref="user")
     @property
     def full_name(self):
         """Return full name of user."""
 
         return f"{self.first_name} {self.last_name}"
+
+class Post(db.Model):
+
+    __tablename__ = "posts"
+
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.Text, nullable = False)
+    content = db.Column(db.Text, nullable = False)
+    created_at = db.Column(db.DateTime, nullable = False, default = datetime.datetime.now)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
 
 
 def connect_db(app):

@@ -9,7 +9,7 @@
   <div>
     <img src="{{ user.image_url }}"> <br><br>
   </div>
-  {% endif %}
+{% endif %}
 
   <div>
     <form>
@@ -20,4 +20,19 @@
 
   </div>
 
+{% endblock %}
+
+{% block user_post %}
+  <div>
+    <h1>Posts</h1>
+    <ul>
+      {% for post in user.posts %}
+      <li>
+        <a href="/posts/{{ post.id}}">{{ post.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    <br>
+    <a href="/users/{{ user.id }}/posts/new">Add Post</a>
+  </div>
 {% endblock %}

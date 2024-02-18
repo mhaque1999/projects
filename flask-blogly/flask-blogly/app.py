@@ -1,7 +1,7 @@
 """Blogly application."""
 
 from flask import *
-from models import db, connect_db, User
+from models import *
 from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
@@ -81,3 +81,68 @@ def delete_user(user_id):
     db.session.commit()
 
     return redirect("/users")
+
+@app.route('/users/<int:user_id>/posts/new')
+def posts_new_form(user_id):
+    """Show form to add a post for that user"""
+
+    user = User.query.get_or_404(user_id)
+    return render_template('post_form.html', user=user)
+
+
+@app.route('/users/<int:user_id>/posts/new', methods=["POST"])
+def posts_new(user_id):
+    """Handle add form; add post and redirect to the user detail page"""
+
+    user = User.query.get_or_404(user_id)
+    title = request.form['title']
+    content = request.form['content']
+
+    new_post = Post(title = title, content = content, user = user)
+
+    db.session.add(new_post)
+    db.session.commit()
+
+    return redirect(f"/users/{user_id}")
+
+
+@app.route('/posts/<int:post_id>')
+def posts_show(post_id):
+    """Show a post. Show buttons to edit and delete the post"""
+
+    post = Post.query.get_or_404(post_id)
+    return render_template('show_post.html', post = post)
+
+
+@app.route('/posts/<int:post_id>/edit')
+def posts_edit(post_id):
+    """Show form to edit a post, and to cancel (back to user page)"""
+
+    post = Post.query.get_or_404(post_id)
+    return render_template('edit_post.html', post = post)
+
+
+@app.route('/posts/<int:post_id>/edit', methods=["POST"])
+def posts_update(post_id):
+    """Handle editing of a post. Redirect back to the post view"""
+
+    post = Post.query.get_or_404(post_id)
+    post.title = request.form['title']
+    post.content = request.form['content']
+
+    db.session.add(post)
+    db.session.commit()
+
+    return redirect(f"/users/{post.user_id}")
+
+
+@app.route('/posts/<int:post_id>/delete', methods=["POST"])
+def posts_destroy(post_id):
+    """Delete the post"""
+
+    post = Post.query.get_or_404(post_id)
+
+    db.session.delete(post)
+    db.session.commit()
+    print("Post was deleted")
+    return redirect(f"/users/{post.user_id}")
