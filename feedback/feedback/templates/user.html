@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}<h1>{{ user.username }} Details</h1>{% endblock %}
+
+{% block content %}
+<div>
+    <label for="username">Username:</label>
+    <input type="text" name="username" value="{{ user.username }}">
+</div>
+
+<div>
+    <label for="email">Email:</label>
+    <input type="text" name="email" value="{{ user.email }}">
+</div>
+
+<div>
+    <label for="first_name">First Name:</label>
+    <input type="text" name="first_name" value="{{ user.first_name }}">
+</div>
+
+<div>
+    <label for="last_name">Last Name:</label>
+    <input type="text" name="last_name" value="{{ user.last_name }}">
+</div>
+
+<div>
+    <ul>
+        {% for feedback in user.feedback %}
+        <li>
+            <h3>{{ feedback.title }}</h3>
+            <p>{{ feedback.content }}</p>
+        </li>
+        <form>
+            <button formmethod="GET" formaction="/feedback/{{feedback.id}}/update">Edit</button>
+            <button formmethod="POST" formaction="/feedback/{{feedback.id}}/delete">Delete</button>
+        </form> 
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    <form>
+        <button formmethod="GET" formaction="/users/{{user.username}}/feedback/add">Add A Feedback</button>
+        <button formmethod="POST" formaction="/users/{{user.username}}/delete">Delete User</button>
+        <!-- <a href="/users/{{user.username}}/feedback/add">Add A Feedback</a> -->
+    </form>
+    
+</div>
+{% endblock %}
