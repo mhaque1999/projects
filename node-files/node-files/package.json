@@ -1,0 +1,22 @@
+{
+  "name": "first-node-exercise",
+  "version": "1.0.0",
+  "description": "",
+  "main": "step1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhaque1999/projects.git"
+  },
+  "author": "maahin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mhaque1999/projects/issues"
+  },
+  "homepage": "https://github.com/mhaque1999/projects#readme",
+  "dependencies": {
+    "axios": "^1.6.8"
+  }
+}
