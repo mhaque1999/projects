@@ -56,10 +56,22 @@ router.post("", async function(req,res,next){
 
 router.put("/:id", async function(req,res,next){
     try{
-        const {amt} = req.body
+        const {amt, paid} = req.body
+        const isPaid = await db.query(`SELECT paid FROM invoices WHERE id = $1`, [req.params.id]);
+        const currrentPaidDate = isPaid.rows[0].paid_date;
+        let paidDate = null;
+
+        if (!currrentPaidDate && paid) {
+          paidDate = new Date();
+        } else if (!paid) {
+          paidDate = null
+        } else {
+          paidDate = currPaidDate;
+        }
+
         const result = await db.query(`update invoices 
-        set amt=$1 where id=$2 returning 
-        amt`, [amt, req.params.id])
+        set amt=$1, paid=$2, paid_date=$3 where id=$4 returning 
+        amt`, [amt, paid, paidDate, req.params.id])
 
         return res.status(201).json(result.rows[0]);
         //const company = {code:req.body.code, name:req.body.name, 
@@ -76,7 +88,7 @@ router.delete("/:id", async function(req,res,next){
         const result = await db.query(`delete from invoices 
         where id=$1`, [req.params.id])
 
-        return res.status(204).json({status: "Deleted"});
+        return res.json({status: "Deleted"});
         //const company = {code:req.body.code, name:req.body.name, 
             //description:req.body.description}
         

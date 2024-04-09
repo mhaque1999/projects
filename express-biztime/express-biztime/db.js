@@ -13,10 +13,10 @@ else {
     DB_URI = "postgresql:///biztime";
   }
   
-/* const db = new Client({
+ const db = new Client({
     connectionString: DB_URI
-}); */
-
+}); 
+/*
 const db = new Client({
   user:"maahin",
   host: "localhost",
@@ -24,7 +24,7 @@ const db = new Client({
   port: 5432,
   password: process.env.PGPASSWORD,
 
-})
+})*/
 
 if (db.password) {
   console.log('Password is provided:', db.password);
