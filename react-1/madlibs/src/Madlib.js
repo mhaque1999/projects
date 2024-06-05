@@ -6,7 +6,7 @@ function Madlib() {
   const [story, setStory] = useState('');
 
   const generateStory = (noun, verb, adjective) => {
-    const newStory = `Once upon a time, there was a ${adjective} ${noun} who loved to ${verb}. The end.`;
+    const newStory = `Once upon a time, there was a ${adjective} ${noun} who loved to ${verb}.`;
     setStory(newStory);
   };
 
