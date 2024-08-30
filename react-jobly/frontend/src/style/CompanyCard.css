@@ -1,0 +1,22 @@
+.company-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+  
+  .company-card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .company-name {
+    font-weight: bold;
+    color: #007bff; 
+    margin-bottom: 5px;
+  }
+  
+  .company-description {
+    color: #666;
+  }
+  

@@ -1,0 +1,23 @@
+.JobCard {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .JobCard-title {
+    font-weight: bold;
+    color: #007bff; 
+    margin-bottom: 10px;
+  }
+  
+  .JobCard-company {
+    color: #333;
+  }
+  
+  .JobCard-salary,
+  .JobCard-equity {
+    color: #555;
+  }
+  
