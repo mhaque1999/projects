@@ -1,0 +1,4 @@
+- BUG #1: Login route doesn't await the User.authenticate method, which causes issues when trying to access properties of the returned user object.
+- BUG #2: Registration route does not handle missing fields correctly.
+- BUG #3: The PATCH /users/username route allows patching of the admin field, which should not be allowed.
+- BUG #4: The GET /users/username route does not handle the case where the user does not exist.
